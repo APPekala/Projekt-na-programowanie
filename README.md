@@ -24,5 +24,39 @@ Instrukcja uruchomienia na XAMPP
 
 1. Pobierz projekt
 Sklonuj repozytorium lub pobierz pliki ZIP:
-```bash
+
 git clone https://github.com/APPekala/Projekt-na-programowanie.git
+
+2. Przenieś projekt do katalogu htdocs
+   C:\xampp\htdocs\
+
+3. Uruchom Apache w XAMPP
+
+ Otwórz XAMPP Control Panel
+ Kliknij Start przy Apache
+
+4. Przygotuj bazę danych
+Aplikacja korzysta z SQLite – baza danych tworzona jest automatycznie, ale musisz utworzyć tabele.
+
+Opcja A: Przez terminal
+Otwórz CMD i wykonaj:
+
+cmd
+cd C:\xampp\htdocs\notatnik
+sqlite3 database/database.sqlite < database/schema.sql
+
+5. Nadaj uprawnienia do zapisu
+W systemie Windows uprawnienia są zwykle domyślnie ustawione, ale jeśli coś nie działa:
+Kliknij prawym przyciskiem na folder database → Właściwości → Zabezpieczenia
+Dodaj użytkownika Everyone z pełnymi uprawnieniami (lub ustaw dla IIS_IUSRS)
+Powtórz dla folderu public\uploads
+
+6. Skonfiguruj BASE_URL (jeśli trzeba)
+Otwórz config/config.php – w większości przypadków domyślna wartość jest poprawna:
+php
+define('BASE_URL', '/notatnik/public/');
+
+7. Uruchom aplikację
+W przeglądarce wpisz:
+text
+http://localhost/notatnik/public/
