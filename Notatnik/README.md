@@ -67,3 +67,6 @@ define('BASE_URL', '/notatnik/public/');
 W przeglądarce wpisz:
 
 http://localhost/notatnik/public/
+
+
+Docelowa ocena 4
