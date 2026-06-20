@@ -8,9 +8,8 @@ class Note
     private $tag;
     private $priority;
     private $createdAt;
-    private $attachment; // nazwa pliku (lub null)
+    private $attachment; 
 
-    // Gettery i settery
     public function getId() { return $this->id; }
     public function getTitle() { return $this->title; }
     public function getContent() { return $this->content; }
