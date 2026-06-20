@@ -18,7 +18,6 @@
         <main class="app-main container">
             <?php include __DIR__ . '/partials/messages.php'; ?>
 
-            <!-- Panel podsumowujący -->
             <section class="dashboard-panel">
                 <h2>📊 Podsumowanie</h2>
                 <div class="stats-grid">
@@ -41,7 +40,6 @@
                 </div>
             </section>
 
-            <!-- Pasek wyszukiwania i filtrów -->
             <section class="toolbar">
                 <form method="get" action="<?= BASE_URL ?>" class="search-form">
                     <input type="hidden" name="action" value="list">
@@ -84,7 +82,6 @@
                 </form>
             </section>
 
-            <!-- Lista notatek -->
             <section class="notes-list">
                 <h2>📋 Lista notatek</h2>
                 <?php if (empty($notes)): ?>
@@ -141,7 +138,6 @@
         </footer>
     </div>
     <script>
-        // Automatyczne znikanie komunikatów
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.alert').forEach(function(el) {
                 setTimeout(function() {
