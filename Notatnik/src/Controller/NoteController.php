@@ -11,7 +11,6 @@ class NoteController
         $this->validator = new Validator();
     }
 
-    // Wyświetlenie listy z filtrami
     public function listAction()
     {
         $search = $_GET['search'] ?? '';
@@ -29,7 +28,6 @@ class NoteController
         $allTags = $this->repository->getAllTags();
         $stats = $this->repository->getStats();
 
-        // Przygotowanie danych do widoku
         $totalNotes = $stats['total'];
         $statsByPriority = $stats['priorities'];
         $statsByTag = $stats['tags'];
@@ -37,7 +35,6 @@ class NoteController
         include __DIR__ . '/../../templates/layout.php';
     }
 
-    // Formularz dodawania/edycji
     public function formAction($id = null)
     {
         $note = null;
@@ -53,7 +50,6 @@ class NoteController
         $errors = [];
         $oldData = [];
 
-        // Jeśli przekazano dane z flash (po błędzie walidacji)
         if (isset($_SESSION['old_data'])) {
             $oldData = $_SESSION['old_data'];
             $errors = $_SESSION['errors'] ?? [];
@@ -70,13 +66,11 @@ class NoteController
         include __DIR__ . '/../../templates/form.php';
     }
 
-    // Zapis (dodawanie / edycja)
     public function saveAction()
     {
         $data = $_POST;
         $file = $_FILES['attachment'] ?? null;
 
-        // Walidacja
         $isEdit = isset($data['id']) && $data['id'] > 0;
         if (!$this->validator->validateNote($data, $isEdit)) {
             $_SESSION['old_data'] = $data;
@@ -86,7 +80,6 @@ class NoteController
             exit;
         }
 
-        // Tworzenie obiektu Note
         $note = new Note();
         if ($isEdit) {
             $note->setId((int)$data['id']);
@@ -96,7 +89,6 @@ class NoteController
         $note->setTag(trim($data['tag']));
         $note->setPriority($data['priority']);
 
-        // Zapis (z załącznikiem)
         try {
             $this->repository->save($note, $file);
             $this->setFlash('Notatka została zapisana.', 'success');
@@ -108,7 +100,6 @@ class NoteController
         exit;
     }
 
-    // Usuwanie
     public function deleteAction()
     {
         $id = (int)($_GET['id'] ?? 0);
