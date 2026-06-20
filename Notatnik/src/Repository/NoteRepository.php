@@ -17,7 +17,6 @@ class NoteRepository
                 WHERE 1=1";
         $params = [];
 
-        // Wyszukiwanie
         if (!empty($filters['search'])) {
             $sql .= " AND (n.title LIKE ? OR n.content LIKE ?)";
             $like = '%' . $filters['search'] . '%';
@@ -25,19 +24,16 @@ class NoteRepository
             $params[] = $like;
         }
 
-        // Filtrowanie po tagu
         if (!empty($filters['tag'])) {
             $sql .= " AND n.tag = ?";
             $params[] = $filters['tag'];
         }
 
-        // Filtrowanie po priorytecie
         if (!empty($filters['priority'])) {
             $sql .= " AND n.priority = ?";
             $params[] = $filters['priority'];
         }
 
-        // Sortowanie
         switch ($sort) {
             case 'created_at_asc':  $sql .= " ORDER BY n.created_at ASC"; break;
             case 'title_asc':       $sql .= " ORDER BY n.title ASC"; break;
@@ -94,7 +90,6 @@ class NoteRepository
 
         try {
             if ($note->getId()) {
-                // UPDATE
                 $sql = "UPDATE notes SET title = ?, content = ?, tag = ?, priority = ? WHERE id = ?";
                 $this->db->query($sql, [
                     $note->getTitle(),
@@ -105,7 +100,6 @@ class NoteRepository
                 ]);
                 $noteId = $note->getId();
             } else {
-                // INSERT
                 $sql = "INSERT INTO notes (title, content, tag, priority) VALUES (?, ?, ?, ?)";
                 $this->db->query($sql, [
                     $note->getTitle(),
@@ -116,9 +110,7 @@ class NoteRepository
                 $noteId = $this->db->lastInsertId();
             }
 
-            // Obsługa załącznika (jeśli przesłano nowy)
             if ($file && $file['error'] === UPLOAD_ERR_OK) {
-                // Usuń stary załącznik (jeśli edycja)
                 if ($note->getId()) {
                     $attachmentModel = new Attachment();
                     $attachmentModel->deleteByNoteId($note->getId());
@@ -146,11 +138,9 @@ class NoteRepository
         $db = $this->db->getPdo();
         $db->beginTransaction();
         try {
-            // Usuń załącznik fizycznie
             $attachmentModel = new Attachment();
             $attachmentModel->deleteByNoteId($id);
 
-            // Usuń notatkę
             $sql = "DELETE FROM notes WHERE id = ?";
             $this->db->query($sql, [$id]);
 
@@ -171,12 +161,10 @@ class NoteRepository
     public function getStats()
     {
         $stats = [];
-        // Liczba notatek
         $sql = "SELECT COUNT(*) as total FROM notes";
         $stmt = $this->db->query($sql);
         $stats['total'] = $stmt->fetch()['total'];
 
-        // Priorytety
         $sql = "SELECT priority, COUNT(*) as count FROM notes GROUP BY priority";
         $stmt = $this->db->query($sql);
         $stats['priorities'] = [];
@@ -184,7 +172,6 @@ class NoteRepository
             $stats['priorities'][$row['priority']] = $row['count'];
         }
 
-        // Tagi
         $sql = "SELECT tag, COUNT(*) as count FROM notes GROUP BY tag ORDER BY count DESC";
         $stmt = $this->db->query($sql);
         $stats['tags'] = [];
