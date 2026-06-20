@@ -45,6 +45,13 @@ cmd
 cd C:\xampp\htdocs\notatnik
 sqlite3 database/database.sqlite < database/schema.sql
 
+Opcja B: Przez DB Browser for SQLite
+Otwórz DB Browser for SQLite
+Kliknij Otwórz bazę danych → wybierz database/database.sqlite
+Przejdź do zakładki Wykonaj SQL
+Wklej zawartość pliku database/schema.sql
+Kliknij Uruchom
+
 5. Nadaj uprawnienia do zapisu
 W systemie Windows uprawnienia są zwykle domyślnie ustawione, ale jeśli coś nie działa:
 Kliknij prawym przyciskiem na folder database → Właściwości → Zabezpieczenia
@@ -58,5 +65,5 @@ define('BASE_URL', '/notatnik/public/');
 
 7. Uruchom aplikację
 W przeglądarce wpisz:
-text
+
 http://localhost/notatnik/public/
