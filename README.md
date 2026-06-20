@@ -25,4 +25,4 @@ Instrukcja uruchomienia na XAMPP
 1. Pobierz projekt
 Sklonuj repozytorium lub pobierz pliki ZIP:
 ```bash
-git clone https://github.com/TwojaNazwa/notatnik.git
+git clone https://github.com/APPekala/Projekt-na-programowanie.git
