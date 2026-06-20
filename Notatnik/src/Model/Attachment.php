@@ -25,7 +25,6 @@ class Attachment
 
     public function deleteByNoteId($noteId)
     {
-        // Fizyczne usunięcie pliku
         $attachment = $this->findByNoteId($noteId);
         if ($attachment) {
             $filePath = UPLOAD_DIR . $attachment['filename'];
@@ -33,7 +32,6 @@ class Attachment
                 unlink($filePath);
             }
         }
-        // Usuwamy rekord z bazy (kaskadowo lub ręcznie)
         $sql = "DELETE FROM attachments WHERE note_id = ?";
         $this->db->query($sql, [$noteId]);
     }
