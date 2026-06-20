@@ -8,19 +8,16 @@ class Validator
     {
         $this->errors = [];
 
-        // Tytuł
         $title = trim($data['title'] ?? '');
         if (mb_strlen($title) < TITLE_MIN || mb_strlen($title) > TITLE_MAX) {
             $this->errors['title'] = "Tytuł musi mieć od " . TITLE_MIN . " do " . TITLE_MAX . " znaków.";
         }
 
-        // Treść (wymagana)
         $content = trim($data['content'] ?? '');
         if (empty($content)) {
             $this->errors['content'] = "Treść nie może być pusta.";
         }
 
-        // Tag (dozwolone znaki: litery, cyfry, myślnik, podkreślenie, spacja)
         $tag = trim($data['tag'] ?? '');
         if (empty($tag)) {
             $this->errors['tag'] = "Tag jest wymagany.";
@@ -30,7 +27,6 @@ class Validator
             $this->errors['tag'] = "Tag może mieć maksymalnie " . TAG_MAX . " znaków.";
         }
 
-        // Priorytet
         $priority = $data['priority'] ?? '';
         if (!in_array($priority, PRIORITIES)) {
             $this->errors['priority'] = "Nieprawidłowy priorytet.";
