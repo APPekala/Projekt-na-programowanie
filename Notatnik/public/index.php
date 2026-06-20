@@ -2,7 +2,6 @@
 
 require_once __DIR__ . '/../config/config.php';
 
-// Autoloader (prosty, bez composera)
 spl_autoload_register(function ($class) {
     $prefix = 'src\\';
     $baseDir = __DIR__ . '/../src/';
@@ -17,6 +16,5 @@ spl_autoload_register(function ($class) {
     }
 });
 
-// Uruchom router
 $router = new Router();
 $router->dispatch();
