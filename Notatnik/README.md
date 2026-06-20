@@ -6,12 +6,12 @@ Notatki można filtrować, sortować i przeszukiwać.
 
  Funkcje
 
-- Tworzenie, edycja i usuwanie notatek
-- Filtrowanie po tagu i priorytecie
+- Tworzenie, edytowanie i usuwanie notatek
+- Filtrowanie po tagach i priorytecie notatki (Wysoki, Średni, Niski)
 - Pełnotekstowe wyszukiwanie w tytule i treści
-- Sortowanie po dacie, tytule i priorytecie
-- Załączniki plików
-- Panel podsumowujący (statystyki)
+- Sortowanie według daty oraz po tytule i priorytecie
+- Dodawanie załączników (np. zdjęcie listy zakupów)
+- Podsumowanie notatek
 
 Wymagania systemu
 
