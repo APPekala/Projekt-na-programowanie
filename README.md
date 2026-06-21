@@ -69,4 +69,4 @@ W przeglądarce wpisz:
 http://localhost/notatnik/public/
 
 
-Docelowa ocena 4
+Docelowa ocena 3+
