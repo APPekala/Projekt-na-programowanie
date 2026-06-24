@@ -12,7 +12,7 @@ define('BASE_URL', '/notatnik/public/');
 define('TITLE_MIN', 3);
 define('TITLE_MAX', 100);
 define('TAG_MAX', 50);
-define('PREVIEW_LENGTH', 600);
+define('PREVIEW_LENGTH', 60);
 
 define('PRIORITIES', ['niski', 'średni', 'wysoki']);
 
