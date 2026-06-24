@@ -35,12 +35,32 @@ class NoteRepository
         }
 
         switch ($sort) {
-            case 'created_at_asc':  $sql .= " ORDER BY n.created_at ASC"; break;
-            case 'title_asc':       $sql .= " ORDER BY n.title ASC"; break;
-            case 'title_desc':      $sql .= " ORDER BY n.title DESC"; break;
-            case 'priority_asc':    $sql .= " ORDER BY n.priority ASC"; break;
-            case 'priority_desc':   $sql .= " ORDER BY n.priority DESC"; break;
-            default:                $sql .= " ORDER BY n.created_at DESC"; break;
+            case 'created_at_asc':
+                $sql .= " ORDER BY n.created_at ASC";
+                break;
+            case 'title_asc':
+                $sql .= " ORDER BY n.title ASC";
+                break;
+            case 'title_desc':
+                $sql .= " ORDER BY n.title DESC";
+                break;
+            case 'priority_asc':
+                $sql .= " ORDER BY CASE n.priority
+                            WHEN 'niski' THEN 1
+                            WHEN 'średni' THEN 2
+                            WHEN 'wysoki' THEN 3
+                            ELSE 4 END ASC";
+                break;
+            case 'priority_desc':
+                $sql .= " ORDER BY CASE n.priority
+                            WHEN 'niski' THEN 1
+                            WHEN 'średni' THEN 2
+                            WHEN 'wysoki' THEN 3
+                            ELSE 4 END DESC";
+                break;
+            default:
+                $sql .= " ORDER BY n.created_at DESC";
+                break;
         }
 
         $stmt = $this->db->query($sql, $params);
